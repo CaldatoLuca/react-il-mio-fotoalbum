@@ -6,6 +6,7 @@ const validator = require("../middlewares/validator");
 const authenticateJWT = require("../middlewares/authenticateJwt");
 const photoController = require("../controllers/photoController");
 const photoValidation = require("../validations/photoValidation");
+const photoOwnership = require("../middlewares/photoOwnership");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -42,7 +43,11 @@ router.use(authenticateJWT);
 
 router.put(
   "/:slug",
-  [upload.single("image"), validator(photoValidation.photoValidation)],
+  [
+    upload.single("image"),
+    photoOwnership,
+    validator(photoValidation.photoValidation),
+  ],
   photoController.update
 );
 

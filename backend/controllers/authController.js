@@ -11,7 +11,7 @@ const register = async (req, res, next) => {
     password: await hashPassword(password),
     image: req.file ? req.file.filename : null,
     name,
-    role: "SUPERADMIN",
+    role: "USER",
   };
 
   try {
