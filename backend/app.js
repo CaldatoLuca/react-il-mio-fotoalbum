@@ -6,6 +6,7 @@ const morgan = require("morgan");
 const notFound = require("./middlewares/notFound");
 const errorHandler = require("./middlewares/errorHandler");
 const authRouter = require("./routers/AuthRouter");
+const photoRouter = require("./routers/photoRouter");
 
 require("dotenv").config();
 
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
   res.send("Home Page");
 });
 app.use("/auth", authRouter);
+app.use("/photos", photoRouter);
 
 app.use(notFound);
 app.use(errorHandler);

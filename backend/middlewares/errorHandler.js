@@ -19,6 +19,9 @@ module.exports = (err, req, res, next) => {
       if (req.path === "/auth/register") {
         deleteImage(req.file.filename, "users");
       }
+      if (req.path === "/photos") {
+        deleteImage(req.file.filename, "photos");
+      }
     }
 
     res.status(err.statusCode).json({
