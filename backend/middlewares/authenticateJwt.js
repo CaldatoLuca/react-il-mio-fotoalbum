@@ -21,7 +21,9 @@ const authenticateJWT = (req, res, next) => {
     if (err) {
       const errorMessage =
         errorMessages[err.name] || "Errore di autenticazione";
-      deleteImage(req.file.filename, "photos");
+      if (req.file) {
+        deleteImage(req.file.filename, "photos");
+      }
       throw new AuthError(errorMessage, 401);
     }
 

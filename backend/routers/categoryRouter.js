@@ -5,7 +5,6 @@ const validator = require("../middlewares/validator");
 const validation = require("../validations/categoryValidation");
 const authtenticateJwt = require("../middlewares/authenticateJwt");
 const isSuperAdmin = require("../middlewares/isSuperAdmin");
-const multer = require("multer");
 
 router.use(authtenticateJwt);
 router.use(isSuperAdmin);
@@ -15,5 +14,7 @@ router.post(
   validator(validation.categoryValidation),
   categoryController.store
 );
+
+router.get("/", categoryController.index);
 
 module.exports = router;
