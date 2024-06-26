@@ -28,8 +28,31 @@ const register = async (req, res, next) => {
   }
 };
 
-const login = (req, res, next) => {
-  res.json("login");
+const login = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await prisma.user.findUnique({ where: { email: email } });
+    if (!user) {
+      return next(new AuthError("User not found", 404));
+    }
+
+    const isPswValid = await comparePassword(password, user.password);
+
+    if (!isPswValid) {
+      return next(new AuthError("Wrong password", 401));
+    }
+
+    const token = auth.generateToken(user);
+
+    res.status(200).json({
+      message: "User logged in successfully",
+      user,
+      token,
+    });
+  } catch (e) {
+    return next(new AuthError(e.message, 500));
+  }
 };
 module.exports = {
   register,

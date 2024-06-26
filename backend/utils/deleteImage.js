@@ -3,9 +3,6 @@ const fs = require("fs");
 
 const deleteImage = (fileName, dir) => {
   let filePath = path.join(__dirname, `../public/${dir}`, fileName);
-  console.log(__dirname);
-  console.log(fileName);
-  console.log(filePath);
   if (fs.existsSync(filePath)) {
     try {
       fs.unlinkSync(filePath);
