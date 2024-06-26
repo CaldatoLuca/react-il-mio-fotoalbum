@@ -47,7 +47,7 @@ const idValidation = {
     custom: {
       options: async (value) => {
         const category = await prisma.category.findUnique({
-          where: { id: value },
+          where: { id: +value },
         });
         if (!category) {
           throw new ValidationError(

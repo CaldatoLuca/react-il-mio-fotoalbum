@@ -17,4 +17,10 @@ router.post(
 
 router.get("/", categoryController.index);
 
+router.delete(
+  "/:id",
+  validator(validation.idValidation),
+  categoryController.destroy
+);
+
 module.exports = router;

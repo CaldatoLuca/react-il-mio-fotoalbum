@@ -48,7 +48,28 @@ const index = async (req, res, next) => {
   }
 };
 
+const destroy = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const category = await prisma.category.findUnique({
+      where: { id: +id },
+    });
+
+    await prisma.category.delete({
+      where: { id: +id },
+    });
+
+    res.status(200).json({
+      message: "Category deleted successfully",
+    });
+  } catch (e) {
+    return next(new CustomError(e.message, 500));
+  }
+};
+
 module.exports = {
   store,
   index,
+  destroy,
 };
