@@ -23,6 +23,13 @@ const categoryValidation = {
             400
           );
         }
+        const category = await prisma.category.findUnique({
+          where: { name: value },
+        });
+
+        if (category) {
+          throw new ValidationError(`Category already exist`, 400);
+        }
 
         return true;
       },
