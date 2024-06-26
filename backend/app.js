@@ -7,6 +7,7 @@ const notFound = require("./middlewares/notFound");
 const errorHandler = require("./middlewares/errorHandler");
 const authRouter = require("./routers/AuthRouter");
 const photoRouter = require("./routers/photoRouter");
+const categoryRouter = require("./routers/categoryRouter");
 
 require("dotenv").config();
 
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 });
 app.use("/auth", authRouter);
 app.use("/photos", photoRouter);
+app.use("/categories", categoryRouter);
 
 app.use(notFound);
 app.use(errorHandler);
