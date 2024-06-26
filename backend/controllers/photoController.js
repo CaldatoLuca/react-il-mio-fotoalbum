@@ -99,6 +99,27 @@ const index = async (req, res, next) => {
   }
 };
 
+const show = async (req, res, next) => {
+  const { slug } = req.params;
+
+  try {
+    const photo = await prisma.photo.findUnique({
+      where: { slug: slug },
+      include: {
+        categories: { select: { id: true, name: true } },
+        user: { select: { name: true } },
+      },
+    });
+
+    res.status(200).json({
+      message: "Photo found",
+      photo,
+    });
+  } catch (e) {
+    return next(new CustomError(e.message, 500));
+  }
+};
+
 const update = async (req, res, next) => {
   const { slug } = req.params;
   let { title, description, visible, categories } = req.body;
@@ -147,5 +168,6 @@ const update = async (req, res, next) => {
 module.exports = {
   store,
   index,
+  show,
   update,
 };

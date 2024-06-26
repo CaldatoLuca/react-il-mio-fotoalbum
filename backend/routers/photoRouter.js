@@ -36,7 +36,7 @@ router.get("/", photoController.index);
 //controllo per rotte con slug
 router.use("/:slug", validator(photoValidation.slugValidation));
 
-// router.get("/:slug", postController.show);
+router.get("/:slug", photoController.show);
 
 router.use(authenticateJWT);
 
