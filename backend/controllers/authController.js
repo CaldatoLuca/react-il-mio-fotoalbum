@@ -6,13 +6,12 @@ const { hashPassword, comparePassword } = require("../utils/password");
 
 const register = async (req, res, next) => {
   const { email, password, name } = req.body;
-
   const data = {
     email,
     password: await hashPassword(password),
-    image: `${req.file.filename}`,
+    image: req.file ? req.file.filename : null,
     name,
-    role: "USER",
+    role: "SUPERADMIN",
   };
 
   try {

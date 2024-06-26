@@ -61,6 +61,7 @@ const register = {
   },
   name: {
     in: ["body"],
+    optional: true,
     isString: {
       errorMessage: "Name must be a string",
       bail: true,
@@ -84,6 +85,7 @@ const register = {
   },
   image: {
     in: ["file"],
+    optional: true,
     notEmpty: {
       errorMessage: "Image must not be empty",
       bail: true,

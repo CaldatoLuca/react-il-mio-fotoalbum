@@ -1,10 +1,26 @@
 const CustomError = require("../exceptions/customError");
-
-//in base alla path da cui arrivo (la so dalla req, faccio un deleteImage per photo o user)
+const ValidationError = require("../exceptions/validationError");
+const AuthError = require("../exceptions/authError");
+const deleteImage = require("../utils/deleteImage");
 
 module.exports = (err, req, res, next) => {
-  // controllo se è un mio errore custom
-  if (err instanceof CustomError) {
+  if (
+    err instanceof CustomError ||
+    err instanceof ValidationError ||
+    err instanceof AuthError
+  ) {
+    if (
+      req.path === "/auth/register" &&
+      req.file &&
+      err instanceof ValidationError
+    ) {
+    }
+    if (req.file && err instanceof ValidationError) {
+      if (req.path === "/auth/register") {
+        deleteImage(req.file.filename, "users");
+      }
+    }
+
     res.status(err.statusCode).json({
       status: err.name,
       statusCode: err.statusCode,
