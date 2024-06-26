@@ -16,7 +16,10 @@ const postOwnership = async (req, res, next) => {
     });
 
     if (photo.userId !== userId) {
-      deleteImage(req.file.filename, "photos");
+      if (req.method === "PUT") {
+        deleteImage(req.file.filename, "photos");
+      }
+
       return next(
         new AuthError(`You are not authorized to perform this action`, 401)
       );

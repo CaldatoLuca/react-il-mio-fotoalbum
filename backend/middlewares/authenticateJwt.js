@@ -1,6 +1,7 @@
 const AuthError = require("../exceptions/authError");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const deleteImage = require("../utils/deleteImage");
 
 const authenticateJWT = (req, res, next) => {
   const { authorization } = req.headers;
@@ -20,6 +21,7 @@ const authenticateJWT = (req, res, next) => {
     if (err) {
       const errorMessage =
         errorMessages[err.name] || "Errore di autenticazione";
+      deleteImage(req.file.filename, "photos");
       throw new AuthError(errorMessage, 401);
     }
 

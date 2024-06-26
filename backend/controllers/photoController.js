@@ -157,8 +157,29 @@ const update = async (req, res, next) => {
     });
 
     res.status(200).json({
-      message: "Post updated successfully",
+      message: "Photo updated successfully",
       photo,
+    });
+  } catch (e) {
+    return next(new CustomError(e.message, 500));
+  }
+};
+
+const destroy = async (req, res, next) => {
+  const { slug } = req.params;
+
+  try {
+    const photo = await prisma.photo.findUnique({
+      where: { slug: slug },
+    });
+    await prisma.photo.delete({
+      where: { slug: slug },
+    });
+
+    deleteImage(photo.image, "photos");
+
+    res.status(200).json({
+      message: "Photo deleted successfully",
     });
   } catch (e) {
     return next(new CustomError(e.message, 500));
@@ -170,4 +191,5 @@ module.exports = {
   index,
   show,
   update,
+  destroy,
 };

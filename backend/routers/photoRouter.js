@@ -51,5 +51,6 @@ router.put(
   photoController.update
 );
 
-// router.delete("/:slug", postOwnership, postController.destroy);
+router.delete("/:slug", photoOwnership, photoController.destroy);
+
 module.exports = router;
