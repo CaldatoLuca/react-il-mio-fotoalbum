@@ -30,5 +30,6 @@ router.post(
   ],
   photoController.store
 );
+router.get("/", photoController.index);
 
 module.exports = router;
