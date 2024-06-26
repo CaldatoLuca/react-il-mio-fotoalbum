@@ -3,9 +3,9 @@ const app = express();
 const path = require("path");
 const cors = require("cors");
 const morgan = require("morgan");
-const notFound = require("./middlewares/");
+const notFound = require("./middlewares/notFound");
 const errorHandler = require("./middlewares/errorHandler");
-const authRouter = require("./routers/authRouter");
+const authRouter = require("./routers/AuthRouter");
 
 require("dotenv").config();
 
@@ -22,6 +22,7 @@ app.use(morgan("dev"));
 app.get("/", (req, res) => {
   res.send("Home Page");
 });
+app.use("/auth", authRouter);
 
 app.use(notFound);
 app.use(errorHandler);
