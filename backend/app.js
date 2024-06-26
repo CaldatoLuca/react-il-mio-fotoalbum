@@ -5,6 +5,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const notFound = require("./middlewares/");
 const errorHandler = require("./middlewares/errorHandler");
+const authRouter = require("./routers/authRouter");
 
 require("dotenv").config();
 
