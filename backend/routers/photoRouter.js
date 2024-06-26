@@ -30,6 +30,21 @@ router.post(
   ],
   photoController.store
 );
+
 router.get("/", photoController.index);
 
+//controllo per rotte con slug
+router.use("/:slug", validator(photoValidation.slugValidation));
+
+// router.get("/:slug", postController.show);
+
+router.use(authenticateJWT);
+
+router.put(
+  "/:slug",
+  [upload.single("image"), validator(photoValidation.photoValidation)],
+  photoController.update
+);
+
+// router.delete("/:slug", postOwnership, postController.destroy);
 module.exports = router;

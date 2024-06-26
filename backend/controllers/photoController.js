@@ -99,7 +99,53 @@ const index = async (req, res, next) => {
   }
 };
 
+const update = async (req, res, next) => {
+  const { slug } = req.params;
+  let { title, description, visible, categories } = req.body;
+
+  const user = req.user;
+
+  const newSlug = await uniqueSlug(title);
+
+  const photo = await prisma.photo.findUnique({
+    where: { slug: slug },
+  });
+
+  if (req.file) {
+    deleteImage(photo.image, "photos");
+  }
+
+  const data = {
+    title,
+    slug: newSlug,
+    description,
+    image: req.file ? `${req.file.filename}` : photo.image,
+    visible,
+    categories: {
+      connect: categories.map((c) => ({ id: +c })),
+    },
+    user: {
+      connect: { id: user.id },
+    },
+  };
+
+  try {
+    const photo = await prisma.photo.update({
+      where: { slug: slug },
+      data,
+    });
+
+    res.status(200).json({
+      message: "Post updated successfully",
+      photo,
+    });
+  } catch (e) {
+    return next(new CustomError(e.message, 500));
+  }
+};
+
 module.exports = {
   store,
   index,
+  update,
 };
