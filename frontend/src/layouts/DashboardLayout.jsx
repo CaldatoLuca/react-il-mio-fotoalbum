@@ -7,7 +7,9 @@ export default () => {
       <DashboardHeader></DashboardHeader>
       <div className="flex">
         <DashboardLeftNav></DashboardLeftNav>
-        <Outlet></Outlet>
+        <div className="bg-neutral-200 text-neutral-800 flex-grow p-10">
+          <Outlet></Outlet>
+        </div>
       </div>
     </>
   );

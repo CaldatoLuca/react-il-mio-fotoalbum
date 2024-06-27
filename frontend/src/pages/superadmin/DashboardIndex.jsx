@@ -3,7 +3,7 @@ import { usePhotos } from "../../contexts/PhotosContext";
 import DashboardPhotoCard from "../../components/superadmin/DashboardPhotoCard";
 
 export default () => {
-  const { photoPaginate, fetchPhotosPaginate } = usePhotos();
+  const { photoPaginate, fetchPhotosPaginate, loading } = usePhotos();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [filter, setFilter] = useState("");
@@ -22,8 +22,12 @@ export default () => {
       )
     : [];
 
+  if (loading) {
+    return <div className="text-center p-20">Loading...</div>;
+  }
+
   return (
-    <div className="bg-neutral-200 text-neutral-800 flex-grow p-10">
+    <>
       <div className="mb-4">
         <input
           type="text"
@@ -65,6 +69,6 @@ export default () => {
           Next
         </button>
       </div>
-    </div>
+    </>
   );
 };
