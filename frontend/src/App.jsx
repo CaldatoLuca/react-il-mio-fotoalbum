@@ -7,6 +7,7 @@ import DashboardPhotoDetails from "./pages/superadmin/DashboardPhotoDetails";
 import NotFound from "./pages/NotFound";
 import DashboardAddPhoto from "./pages/superadmin/DashboardAddPhoto";
 import DashboardUpdatePhoto from "./pages/superadmin/DashboardUpdatePhoto";
+import DashboardCategoriesIndex from "./pages/superadmin/DashboardCategoriesIndex";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         }
       >
         <Route index element={<DashboardIndex />} />
+        <Route path="categories" element={<DashboardCategoriesIndex />} />
         <Route path="add-photo" element={<DashboardAddPhoto />} />
         <Route path="update/:slug" element={<DashboardUpdatePhoto />} />
         <Route path=":slug" element={<DashboardPhotoDetails />} />
