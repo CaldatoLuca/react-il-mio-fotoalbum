@@ -3,10 +3,16 @@ import { usePhotos } from "../../contexts/PhotosContext";
 import DashboardPhotoCard from "../../components/superadmin/DashboardPhotoCard";
 
 export default () => {
-  const { photoPaginate, fetchPhotosPaginate, loading } = usePhotos();
+  const { photoPaginate, fetchPhotosPaginate, deletePhoto, loading } =
+    usePhotos();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [filter, setFilter] = useState("");
+
+  const handleDeleteClick = async (slug) => {
+    await deletePhoto(slug);
+    fetchPhotosPaginate(page, limit);
+  };
 
   useEffect(() => {
     fetchPhotosPaginate(page, limit);
@@ -46,6 +52,7 @@ export default () => {
             categories={p.categories}
             user={p.user}
             slug={p.slug}
+            deletePhoto={handleDeleteClick}
           />
         ))}
       </div>

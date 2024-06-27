@@ -1,6 +1,7 @@
 import { usePhotos } from "../../contexts/PhotosContext";
 import { BiSolidHome as Home } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const links = [
   {
@@ -12,6 +13,8 @@ const links = [
 
 export default () => {
   const { categories } = usePhotos();
+  const location = useLocation();
+
   return (
     <div className="p-5 bg-neutral-800 text-neutral-200 ">
       <ul>
@@ -19,7 +22,11 @@ export default () => {
           <li key={`link-${i}`}>
             <Link
               to={l.path}
-              className="flex items-center gap-2 px-2 py-1 hover:bg-neutral-400 hover:font-semibold"
+              className={`flex items-center gap-2 px-2 py-1 ${
+                location.pathname === l.path
+                  ? "font-semibold bg-neutral-400"
+                  : "hover:bg-neutral-400 hover:font-semibold"
+              } `}
             >
               {l.icon} {l.title}
             </Link>
@@ -31,7 +38,7 @@ export default () => {
         {categories.map((c, i) => (
           <li
             key={`category-${i}`}
-            className="cursor-pointer hover:bg-opacity-50 hover:bg-neutral-400 hover:font-semibold px-1"
+            className={`cursor-pointer hover:bg-opacity-50 hover:bg-neutral-400 hover:font-semibold px-1`}
           >
             {c.name}
           </li>

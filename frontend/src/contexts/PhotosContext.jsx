@@ -52,6 +52,16 @@ const PhotosProvider = ({ children }) => {
     }
   };
 
+  const deletePhoto = async (slug) => {
+    try {
+      await instance.delete(`/photos/${slug}`);
+    } catch (error) {
+      console.error("Error deleting photo:", error);
+    } finally {
+      fetchPhotos();
+    }
+  };
+
   const fetchCategory = async () => {
     setLoading(true);
     try {
@@ -75,6 +85,7 @@ const PhotosProvider = ({ children }) => {
     fetchPhotosPaginate,
     photo,
     fetchPhoto,
+    deletePhoto,
     categories,
     loading,
   };

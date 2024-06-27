@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { RiDeleteBinFill as Delete } from "react-icons/ri";
 import { IoPencil as Modify } from "react-icons/io5";
 
-export default ({ title, image, categories, user, slug }) => {
+export default ({ title, image, categories, user, slug, deletePhoto }) => {
   const { baseImgUrl } = useGlobal();
 
   return (
@@ -14,19 +14,22 @@ export default ({ title, image, categories, user, slug }) => {
           <Modify />
         </Link>
         <h3>{title}</h3>
-        <div className="text-red-400">
+        <button className="text-red-400" onClick={() => deletePhoto(slug)}>
           <Delete />
-        </div>
+        </button>
       </div>
 
       {/* Immagine */}
-      <figure className="card-dash-img-container">
+      <Link
+        to={`/admin/dashboard/${slug}`}
+        className="card-dash-img-container block"
+      >
         <img
           src={`${baseImgUrl}${image}`}
           alt={`image-${slug}`}
           className="card-dash-img"
         />
-      </figure>
+      </Link>
 
       {/* Categories */}
       <ul className="flex flex-wrap gap-2 p-2 justify-center">
