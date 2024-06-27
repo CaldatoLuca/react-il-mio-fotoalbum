@@ -22,7 +22,7 @@ const store = async (req, res, next) => {
 };
 
 const index = async (req, res, next) => {
-  const { page = 1, limit = 5 } = req.query;
+  const { page = 1, limit = 50 } = req.query;
 
   const offset = (page - 1) * limit;
   const totalItems = await prisma.category.count();
