@@ -3,7 +3,7 @@ import { usePhotos } from "../../contexts/PhotosContext";
 import DashboardPhotoCard from "../../components/superadmin/DashboardPhotoCard";
 
 export default () => {
-  const { photoPaginate, fetchPhotosPaginate, categories } = usePhotos();
+  const { photoPaginate, fetchPhotosPaginate } = usePhotos();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [filter, setFilter] = useState("");

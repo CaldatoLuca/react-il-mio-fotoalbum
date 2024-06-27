@@ -1,13 +1,16 @@
 import React, { useState, useContext, createContext } from "react";
 import instance from "../utils/axiosClient";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const PhotosContext = createContext();
 
 const PhotosProvider = ({ children }) => {
   const [photos, setPhotos] = useState([]);
+  const [photo, setPhoto] = useState([]);
   const [categories, setCategories] = useState([]);
   const [photoPaginate, setPhotoPaginate] = useState([]);
+  const navigate = useNavigate();
 
   const fetchPhotos = async () => {
     try {
@@ -18,7 +21,17 @@ const PhotosProvider = ({ children }) => {
     }
   };
 
-  const fetchPhotosPaginate = async (page = 1, limit = 2) => {
+  const fetchPhoto = async (slug) => {
+    try {
+      const response = await instance.get(`/photos/${slug}`);
+      setPhoto(response.data.photo);
+    } catch (error) {
+      console.error("Error fetching photos:", error);
+      navigate("/not-found");
+    }
+  };
+
+  const fetchPhotosPaginate = async (page, limit) => {
     try {
       const response = await instance.get(
         `/photos?page=${page}&limit=${limit}`
@@ -41,14 +54,16 @@ const PhotosProvider = ({ children }) => {
   useEffect(() => {
     fetchPhotos();
     fetchCategory();
-    fetchPhotosPaginate();
+    // fetchPhotosPaginate();
   }, []);
 
   const values = {
     photos,
-    categories,
     photoPaginate,
     fetchPhotosPaginate,
+    photo,
+    fetchPhoto,
+    categories,
   };
 
   return (

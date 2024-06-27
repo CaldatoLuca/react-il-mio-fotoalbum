@@ -3,6 +3,8 @@ import SuperAdminPages from "./middlewares/SuperAdminPages";
 import Login from "./pages/superadmin/Login";
 import DashboardIndex from "./pages/superadmin/DashboardIndex";
 import DashboardLayout from "./layouts/DashboardLayout";
+import DashboardPhotoDetails from "./pages/superadmin/DashboardPhotoDetails";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -17,7 +19,9 @@ function App() {
         }
       >
         <Route index element={<DashboardIndex />} />
+        <Route path=":slug" element={<DashboardPhotoDetails />} />
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
