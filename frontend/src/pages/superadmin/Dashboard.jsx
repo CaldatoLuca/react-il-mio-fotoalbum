@@ -1,3 +1,14 @@
+import { usePhotos } from "../../contexts/PhotosContext";
+
 export default () => {
-  return <div className="text-red-500">dashboard</div>;
+  const { photos } = usePhotos();
+  return (
+    <div className="text-red-500">
+      <ul>
+        {photos.map((p, i) => (
+          <li key={`photo-${i}`}>{p.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
 };

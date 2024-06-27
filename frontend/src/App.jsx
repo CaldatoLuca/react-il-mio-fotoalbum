@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import SuperAdminPages from "./middlewares/SuperAdminPages";
 import Login from "./pages/superadmin/Login";
 import Dashboard from "./pages/superadmin/Dashboard";
+import DashboardLayout from "./layouts/DashboardLayout";
 
 function App() {
   return (
@@ -11,10 +12,12 @@ function App() {
         path="/admin/dashboard"
         element={
           <SuperAdminPages>
-            <Dashboard />
+            <DashboardLayout />
           </SuperAdminPages>
         }
-      />
+      >
+        <Route index element={<Dashboard />} />
+      </Route>
     </Routes>
   );
 }
