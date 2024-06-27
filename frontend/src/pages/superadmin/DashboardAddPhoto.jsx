@@ -16,17 +16,23 @@ export default () => {
     })),
   ];
   const formFields = [
-    { type: "text", name: "title", label: "Title" },
+    { type: "text", name: "title", label: "Title", required: true },
 
-    { type: "checkbox", name: "visible", label: "Visible" },
+    { type: "checkbox", name: "visible", label: "Visible", required: true },
     {
       type: "multicheckbox",
       name: "categories",
       label: "Categories",
       options: categoryOptions,
+      required: true,
     },
-    { type: "textarea", name: "description", label: "Description" },
-    { type: "file", name: "image", label: "Image" },
+    {
+      type: "textarea",
+      name: "description",
+      label: "Description",
+      required: false,
+    },
+    { type: "file", name: "image", label: "Image", required: true },
   ];
 
   const [formValues, handleInputChange, resetForm] = useForm({
@@ -67,6 +73,7 @@ export default () => {
               value={formValues[field.name]}
               onChange={handleInputChange}
               options={field.options}
+              required={field.required}
             />
           ))}
           {err ? (

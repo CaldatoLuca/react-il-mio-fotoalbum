@@ -3,15 +3,13 @@ import { usePhotos } from "../../contexts/PhotosContext";
 import InputElement from "../../components/InputElement";
 import useForm from "../../hooks/useForm";
 import instance from "../../utils/axiosClient";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default () => {
   const { slug } = useParams();
   const [photo, setPhoto] = useState(null);
   const { categories, fetchPhotos } = usePhotos();
   const [err, setErr] = useState(false);
-
   const navigate = useNavigate();
 
   const categoryOptions = [
@@ -21,25 +19,29 @@ export default () => {
     })),
   ];
   const formFields = [
-    { type: "text", name: "title", label: "Title" },
-
-    { type: "checkbox", name: "visible", label: "Visible" },
+    { type: "text", name: "title", label: "Title", required: true },
+    { type: "checkbox", name: "visible", label: "Visible", required: true },
     {
       type: "multicheckbox",
       name: "categories",
       label: "Categories",
       options: categoryOptions,
+      required: true,
     },
-    { type: "textarea", name: "description", label: "Description" },
-    { type: "file", name: "image", label: "Image" },
+    {
+      type: "textarea",
+      name: "description",
+      label: "Description",
+      required: false,
+    },
+    { type: "file", name: "image", label: "Image", required: false },
   ];
 
   const [formValues, handleInputChange, resetForm, setValues] = useForm({
     title: "",
-    categoryId: "",
-    published: false,
-    tags: [],
-    content: "",
+    visible: false,
+    categories: [],
+    description: "",
     image: null,
   });
 
@@ -53,7 +55,7 @@ export default () => {
         visible: photoData.visible,
         categories: photoData.categories.map((c) => c.id),
         description: photoData.description,
-        image: photoData.image,
+        image: null, // Keep image as null initially
       });
     } catch (error) {
       console.error("Error fetching photos:", error);
@@ -65,8 +67,22 @@ export default () => {
   }, [slug]);
 
   const updatePhoto = async () => {
+    const formData = new FormData();
+    formData.append("title", formValues.title);
+    formData.append("visible", formValues.visible);
+    formValues.categories.forEach((category) => {
+      formData.append("categories[]", category);
+    });
+    formData.append("description", formValues.description);
+
+    if (formValues.image) {
+      formData.append("image", formValues.image);
+    } else {
+      formData.append("existingImage", photo.image); // Include existing image if new image is not uploaded
+    }
+
     try {
-      await instance.put(`/photos/${slug}`, formValues, {
+      await instance.put(`/photos/${slug}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -109,8 +125,19 @@ export default () => {
               value={formValues[field.name]}
               onChange={handleInputChange}
               options={field.options}
+              required={field.required}
             />
           ))}
+          {photo.image && (
+            <div>
+              <label>Existing Image:</label>
+              <img
+                src={photo.image}
+                alt="Existing"
+                style={{ width: "100px", height: "100px" }}
+              />
+            </div>
+          )}
           {err && (
             <div className="text-center bg-red-500 rounded-md px-2 py-1">
               {err}

@@ -1,6 +1,14 @@
 import React from "react";
 
-const InputElement = ({ type, name, label, value, onChange, options }) => {
+const InputElement = ({
+  type,
+  name,
+  label,
+  value,
+  onChange,
+  options,
+  required,
+}) => {
   switch (type) {
     case "text":
     case "email":
@@ -15,7 +23,7 @@ const InputElement = ({ type, name, label, value, onChange, options }) => {
             value={value}
             onChange={onChange}
             className=" rounded-md text-neutral-900 outline-none px-1 cursor-pointer"
-            required
+            required={required}
           />
         </div>
       );
@@ -29,6 +37,7 @@ const InputElement = ({ type, name, label, value, onChange, options }) => {
             onChange={onChange}
             className=" rounded-md text-neutral-900"
             rows={10}
+            required={required}
           />
         </div>
       );
@@ -41,7 +50,7 @@ const InputElement = ({ type, name, label, value, onChange, options }) => {
             name={name}
             onChange={onChange}
             className=" rounded-md "
-            required
+            required={required}
           />
         </div>
       );
@@ -54,7 +63,7 @@ const InputElement = ({ type, name, label, value, onChange, options }) => {
             value={value}
             onChange={onChange}
             className=" rounded-md text-neutral-900"
-            required
+            required={required}
           >
             {options.map((option) => (
               <option key={option.value} value={option.value}>
