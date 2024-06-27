@@ -16,10 +16,18 @@ export default () => {
     loadPhoto();
   }, [slug]);
 
+  if (loading) {
+    return <div className="text-center p-20">Loading...</div>;
+  }
+
+  if (!photo) {
+    return <div className="text-center p-20">Photo not found</div>;
+  }
+
   return (
     <div className="grid grid-cols-2">
-      <div className=" col-span-1 flex justify-center items-start">
-        <div className=" shadow-2xl p-5 flex flex-col gap-4">
+      <div className="col-span-1 flex justify-center items-start">
+        <div className="shadow-2xl p-5 flex flex-col gap-4">
           {/* Titolo */}
           <h2 className="text-4xl font-semibold">{photo.title}</h2>
 
@@ -31,20 +39,24 @@ export default () => {
           )}
 
           {/* Categories */}
-          <ul className="flex flex-wrap gap-2">
-            {photo.categories.map((c, i) => (
-              <li
-                key={`cat-${i}`}
-                className={`text-neutral-200 bg-neutral-800 px-3 shadow-2xl `}
-              >
-                {c.name}
-              </li>
-            ))}
-          </ul>
+          {photo.categories && photo.categories.length > 0 ? (
+            <ul className="flex flex-wrap gap-2">
+              {photo.categories.map((c, i) => (
+                <li
+                  key={`cat-${i}`}
+                  className={`text-neutral-200 bg-neutral-800 px-3 shadow-2xl `}
+                >
+                  {c.name}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div>No categories</div>
+          )}
         </div>
       </div>
 
-      <div className=" col-span-1">
+      <div className="col-span-1">
         {/* Immagine */}
         <figure className="det-dash-img-container">
           <img

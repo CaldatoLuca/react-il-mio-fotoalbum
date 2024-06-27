@@ -7,7 +7,7 @@ const PhotosContext = createContext();
 
 const PhotosProvider = ({ children }) => {
   const [photos, setPhotos] = useState([]);
-  const [photo, setPhoto] = useState([]);
+  const [photo, setPhoto] = useState({});
   const [categories, setCategories] = useState([]);
   const [photoPaginate, setPhotoPaginate] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,7 +17,6 @@ const PhotosProvider = ({ children }) => {
     try {
       const response = await instance.get("/photos");
       setPhotos(response.data.photos);
-      setLoading(true);
     } catch (error) {
       console.error("Error fetching photos:", error);
     } finally {
@@ -29,7 +28,6 @@ const PhotosProvider = ({ children }) => {
     try {
       const response = await instance.get(`/photos/${slug}`);
       setPhoto(response.data.photo);
-      setLoading(true);
     } catch (error) {
       console.error("Error fetching photo:", error);
       navigate("/not-found");
@@ -44,7 +42,6 @@ const PhotosProvider = ({ children }) => {
         `/photos?page=${page}&limit=${limit}`
       );
       setPhotoPaginate(response.data);
-      setLoading(true);
     } catch (error) {
       console.error("Error fetching photos:", error);
     } finally {
@@ -78,7 +75,6 @@ const PhotosProvider = ({ children }) => {
     try {
       const response = await instance.get(`/categories`);
       setCategories(response.data.categories);
-      setLoading(true);
     } catch (error) {
       console.error("Error fetching categories:", error);
     } finally {
