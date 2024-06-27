@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import SuperAdminPages from "./middlewares/SuperAdminPages";
 import Login from "./pages/superadmin/Login";
-import Dashboard from "./pages/superadmin/Dashboard";
+import DashboardIndex from "./pages/superadmin/DashboardIndex";
 import DashboardLayout from "./layouts/DashboardLayout";
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
           </SuperAdminPages>
         }
       >
-        <Route index element={<Dashboard />} />
+        <Route index element={<DashboardIndex />} />
       </Route>
     </Routes>
   );

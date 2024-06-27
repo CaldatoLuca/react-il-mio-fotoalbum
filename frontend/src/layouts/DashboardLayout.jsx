@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import DashboardHeader from "../components/DashboardHeader";
-import DashboardLeftNav from "../components/DashboardLeftNav";
+import DashboardHeader from "../components/superadmin/DashboardHeader";
+import DashboardLeftNav from "../components/superadmin/DashboardLeftNav";
 export default () => {
   return (
     <>
