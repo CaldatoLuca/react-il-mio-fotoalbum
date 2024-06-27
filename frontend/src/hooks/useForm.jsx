@@ -21,9 +21,12 @@ const useForm = (initialValues) => {
         });
       }
     } else if (type === "file") {
+      const file = files[0];
+      const imageUrl = URL.createObjectURL(file);
       setValues({
         ...values,
-        [name]: files[0],
+        [name]: file,
+        imageUrl, // Store the image URL for preview
       });
     } else {
       setValues({
