@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem("accessToken");
     setIsLoggedIn(false);
     setUser(null);
-    navigate("/");
+    navigate("/admin/login");
   };
 
   const values = {

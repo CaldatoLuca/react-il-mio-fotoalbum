@@ -12,6 +12,7 @@ export default () => {
             title={p.title}
             image={p.image}
             categories={p.categories}
+            user={p.user}
             slug={p.slug}
           ></DashboardPhotoCard>
         ))}

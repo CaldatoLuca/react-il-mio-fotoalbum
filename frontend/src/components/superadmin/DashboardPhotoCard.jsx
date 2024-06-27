@@ -1,7 +1,7 @@
 import { useGlobal } from "../../contexts/GlobalContext";
 import { Link } from "react-router-dom";
 
-export default ({ title, image, categories, slug }) => {
+export default ({ title, image, categories, user, slug }) => {
   const { baseImgUrl } = useGlobal();
 
   return (
@@ -19,7 +19,7 @@ export default ({ title, image, categories, slug }) => {
       </figure>
 
       {/* Categories */}
-      <ul className=" flex flex-wrap gap-2 p-2 ">
+      <ul className=" flex flex-wrap gap-2 p-2 justify-center">
         {categories.map((c, i) => (
           <li
             key={`cat-${i}`}
@@ -31,6 +31,8 @@ export default ({ title, image, categories, slug }) => {
           </li>
         ))}
       </ul>
+
+      <div className="text-center p-2 text-lg font-semibold ">{user.name}</div>
     </div>
   );
 };
