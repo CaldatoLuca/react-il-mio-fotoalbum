@@ -6,6 +6,8 @@ const validation = require("../validations/categoryValidation");
 const authtenticateJwt = require("../middlewares/authenticateJwt");
 const isSuperAdmin = require("../middlewares/isSuperAdmin");
 
+router.get("/", categoryController.index);
+
 router.use(authtenticateJwt);
 router.use(isSuperAdmin);
 
@@ -14,8 +16,6 @@ router.post(
   validator(validation.categoryValidation),
   categoryController.store
 );
-
-router.get("/", categoryController.index);
 
 router.delete(
   "/:id",

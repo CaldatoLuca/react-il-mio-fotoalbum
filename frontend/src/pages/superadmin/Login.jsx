@@ -35,7 +35,7 @@ export default () => {
   return (
     <div
       id="super-login"
-      className=" min-h-screen bg-neutral-200 flex justify-center items-center"
+      className=" min-h-screen bg-neutral-200 flex flex-col gap-4 justify-center items-center"
     >
       {message ? (
         <div className="text-center bg-red-500 text-xl rounded-md px-2 py-1">
