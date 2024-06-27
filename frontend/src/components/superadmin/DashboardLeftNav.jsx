@@ -2,12 +2,18 @@ import { usePhotos } from "../../contexts/PhotosContext";
 import { BiSolidHome as Home } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { FaPlus as Add } from "react-icons/fa6";
 
 const links = [
   {
     title: "Home",
     icon: <Home />,
     path: "/admin/dashboard",
+  },
+  {
+    title: "Add Photo",
+    icon: <Add />,
+    path: "/admin/dashboard/add-photo",
   },
 ];
 
@@ -17,7 +23,7 @@ export default () => {
 
   return (
     <div className="p-5 bg-neutral-800 text-neutral-200 ">
-      <ul>
+      <ul className=" flex flex-col gap-2 mb-4">
         {links.map((l, i) => (
           <li key={`link-${i}`}>
             <Link

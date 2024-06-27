@@ -14,10 +14,10 @@ const PhotosProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const fetchPhotos = async () => {
-    setLoading(true);
     try {
       const response = await instance.get("/photos");
       setPhotos(response.data.photos);
+      setLoading(true);
     } catch (error) {
       console.error("Error fetching photos:", error);
     } finally {
@@ -26,10 +26,10 @@ const PhotosProvider = ({ children }) => {
   };
 
   const fetchPhoto = async (slug) => {
-    setLoading(true);
     try {
       const response = await instance.get(`/photos/${slug}`);
       setPhoto(response.data.photo);
+      setLoading(true);
     } catch (error) {
       console.error("Error fetching photo:", error);
       navigate("/not-found");
@@ -39,12 +39,12 @@ const PhotosProvider = ({ children }) => {
   };
 
   const fetchPhotosPaginate = async (page, limit) => {
-    setLoading(true);
     try {
       const response = await instance.get(
         `/photos?page=${page}&limit=${limit}`
       );
       setPhotoPaginate(response.data);
+      setLoading(true);
     } catch (error) {
       console.error("Error fetching photos:", error);
     } finally {
@@ -63,10 +63,10 @@ const PhotosProvider = ({ children }) => {
   };
 
   const fetchCategory = async () => {
-    setLoading(true);
     try {
       const response = await instance.get(`/categories`);
       setCategories(response.data.categories);
+      setLoading(true);
     } catch (error) {
       console.error("Error fetching categories:", error);
     } finally {
@@ -81,6 +81,7 @@ const PhotosProvider = ({ children }) => {
 
   const values = {
     photos,
+    fetchPhotos,
     photoPaginate,
     fetchPhotosPaginate,
     photo,

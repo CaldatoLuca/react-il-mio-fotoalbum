@@ -7,7 +7,7 @@ const useForm = (initialValues) => {
     const { name, value, type, checked, files } = e.target;
 
     if (type === "checkbox") {
-      if (name === "published") {
+      if (name === "visible") {
         setValues({
           ...values,
           [name]: checked,
