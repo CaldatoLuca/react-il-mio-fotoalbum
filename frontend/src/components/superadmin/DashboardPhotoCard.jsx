@@ -10,7 +10,7 @@ export default ({ title, image, categories, user, slug, deletePhoto }) => {
     <div className="col-span-1 shadow-2xl">
       {/* Titolo e bottoni */}
       <div className="text-center p-2 text-lg font-semibold flex justify-between items-center">
-        <Link to={`/admin/dashboard/${slug}`} className="text-sky-400">
+        <Link to={`/admin/dashboard/update/${slug}`} className="text-sky-400">
           <Modify />
         </Link>
         <h3>{title}</h3>
