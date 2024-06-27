@@ -36,7 +36,7 @@ export default () => {
               className={`flex items-center gap-2 px-2 py-1 ${
                 location.pathname === l.path
                   ? "font-semibold bg-neutral-400"
-                  : "hover:bg-neutral-400 hover:font-semibold"
+                  : "hover:bg-neutral-400 "
               } `}
             >
               {l.icon} {l.title}
