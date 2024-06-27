@@ -7,8 +7,8 @@ const InputElement = ({ type, name, label, value, onChange, options }) => {
     case "password":
     case "number":
       return (
-        <div className="flex flex-col">
-          <label>{label}</label>
+        <div className="flex flex-col gap-2">
+          <label className=" text-lg font-semibold">{label}</label>
           <input
             type={type}
             name={name}
@@ -21,34 +21,34 @@ const InputElement = ({ type, name, label, value, onChange, options }) => {
       );
     case "textarea":
       return (
-        <div className=" flex flex-col mb-2">
-          <label>{label}</label>
+        <div className=" flex flex-col gap-2">
+          <label className=" text-lg font-semibold">{label}</label>
           <textarea
             name={name}
             value={value}
             onChange={onChange}
             className=" rounded-md text-neutral-900"
-            required
+            rows={10}
           />
         </div>
       );
     case "file":
       return (
-        <div className=" flex flex-col">
-          <label>{label}</label>
+        <div className=" flex flex-col gap-2">
+          <label className=" text-lg font-semibold">{label}</label>
           <input
             type="file"
             name={name}
             onChange={onChange}
-            className=" rounded-md"
+            className=" rounded-md "
             required
           />
         </div>
       );
     case "select":
       return (
-        <div className="flex flex-col">
-          <label>{label}</label>
+        <div className="flex flex-col gap-2">
+          <label className=" text-lg font-semibold">{label}</label>
           <select
             name={name}
             value={value}
@@ -67,7 +67,7 @@ const InputElement = ({ type, name, label, value, onChange, options }) => {
     case "checkbox":
       return (
         <div className="mt-2">
-          <label className="flex items-center gap-2">
+          <label className="flex items-center gap-2 text-lg">
             <input
               type="checkbox"
               name={name}
@@ -81,11 +81,11 @@ const InputElement = ({ type, name, label, value, onChange, options }) => {
       );
     case "multicheckbox":
       return (
-        <div className="flex flex-wrap ">
-          <label className="w-full">{label}</label>
+        <div className="flex flex-wrap gap-1">
+          <label className="text-lg font-semibold w-full">{label}</label>
           {options.map((option) => (
             <div key={option.value} className=" mr-2">
-              <label className=" flex items-center">
+              <label className=" flex items-center gap-2">
                 <input
                   type="checkbox"
                   name={name}

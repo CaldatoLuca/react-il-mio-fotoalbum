@@ -52,6 +52,18 @@ const PhotosProvider = ({ children }) => {
     }
   };
 
+  const addPhoto = async (values) => {
+    try {
+      await instance.post(`/photos`, values, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  };
+
   const deletePhoto = async (slug) => {
     try {
       await instance.delete(`/photos/${slug}`);
@@ -87,6 +99,7 @@ const PhotosProvider = ({ children }) => {
     photo,
     fetchPhoto,
     deletePhoto,
+    addPhoto,
     categories,
     loading,
   };

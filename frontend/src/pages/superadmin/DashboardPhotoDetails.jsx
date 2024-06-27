@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { usePhotos } from "../../contexts/PhotosContext";
 import { useParams } from "react-router-dom";
 import { useGlobal } from "../../contexts/GlobalContext";
@@ -9,12 +9,12 @@ export default () => {
   const { baseImgUrl } = useGlobal();
 
   useEffect(() => {
-    fetchPhoto(slug);
-  }, [slug]);
+    const loadPhoto = async () => {
+      await fetchPhoto(slug);
+    };
 
-  if (loading) {
-    return <div className="text-center p-20">Loading...</div>;
-  }
+    loadPhoto();
+  }, [slug]);
 
   return (
     <div className="grid grid-cols-2">

@@ -6,7 +6,7 @@ import instance from "../../utils/axiosClient";
 import { useNavigate } from "react-router-dom";
 
 export default () => {
-  const { categories, fetchPhotos } = usePhotos();
+  const { categories, fetchPhotos, addPhoto } = usePhotos();
   const [err, setErr] = useState(false);
   const navigate = useNavigate();
   const categoryOptions = [
@@ -37,23 +37,11 @@ export default () => {
     image: null,
   });
 
-  const addPhoto = async () => {
-    try {
-      const response = await instance.post(`/photos`, formValues, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    } catch (error) {
-      throw new Error(error.response.data.message);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await addPhoto();
+      await addPhoto(formValues);
       resetForm();
       navigate("/admin/dashboard", {
         state: { message: "Photo created successfully" },
@@ -64,44 +52,40 @@ export default () => {
   };
 
   return (
-    <div>
-      <h2 className="text-emerald-500 text-3xl font-bold mb-16">
-        Create a new Photo
-      </h2>
+    <div className="flex justify-center items-center flex-col">
+      <h2 className="text-4xl font-semibold mb-12">Create a new Photo</h2>
 
-      <div className="grid grid-cols-2">
-        {/* Form */}
-        <div className="cols-span-1 flex">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-2/3">
-            {formFields.map((field) => (
-              <InputElement
-                key={field.name}
-                type={field.type}
-                name={field.name}
-                label={field.label}
-                value={formValues[field.name]}
-                onChange={handleInputChange}
-                options={field.options}
-              />
-            ))}
-            {err ? (
-              <div className="text-center bg-red-500 rounded-md px-2 py-1">
-                {err}
-              </div>
-            ) : (
-              ""
-            )}
-            <div>
-              <button
-                type="submit"
-                className=" p-1 px-2 bg-neutral-100 text-neutral-900 mt-6 rounded-md"
-                onClick={() => fetchPhotos()}
-              >
-                Create
-              </button>
+      {/* Form */}
+      <div className="flex w-1/2 justify-center">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-2/3">
+          {formFields.map((field) => (
+            <InputElement
+              key={field.name}
+              type={field.type}
+              name={field.name}
+              label={field.label}
+              value={formValues[field.name]}
+              onChange={handleInputChange}
+              options={field.options}
+            />
+          ))}
+          {err ? (
+            <div className="text-center bg-red-500 rounded-md px-2 py-1">
+              {err}
             </div>
-          </form>
-        </div>
+          ) : (
+            ""
+          )}
+          <div>
+            <button
+              type="submit"
+              className=" p-1 px-2 bg-neutral-100 text-neutral-900 mt-6 rounded-md"
+              onClick={() => fetchPhotos()}
+            >
+              Create
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
