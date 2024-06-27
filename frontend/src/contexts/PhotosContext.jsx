@@ -98,6 +98,7 @@ const PhotosProvider = ({ children }) => {
     addPhoto,
     categories,
     loading,
+    fetchCategory,
   };
 
   return (
