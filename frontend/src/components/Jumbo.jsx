@@ -13,11 +13,11 @@ const imagesCarousel = [
     alt: "Image 2",
     caption: "Landscapes",
   },
-  {
-    src: "/car3.jpg",
-    alt: "Image 3",
-    caption: "Sport",
-  },
+  // {
+  //   src: "/car3.jpg",
+  //   alt: "Image 3",
+  //   caption: "Sport",
+  // },
 
   {
     src: "/car6.jpg",
