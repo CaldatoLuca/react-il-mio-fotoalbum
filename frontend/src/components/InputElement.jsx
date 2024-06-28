@@ -35,7 +35,7 @@ const InputElement = ({
             name={name}
             value={value}
             onChange={onChange}
-            className=" rounded-md text-neutral-900"
+            className=" rounded-md text-neutral-900 outline-none"
             rows={10}
             required={required}
           />
