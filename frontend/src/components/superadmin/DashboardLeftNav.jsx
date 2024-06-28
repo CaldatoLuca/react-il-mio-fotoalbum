@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { FaPlus as Add } from "react-icons/fa6";
 import { BiSolidPurchaseTag as Categories } from "react-icons/bi";
+import { FaEnvelope as CloseEnvelope } from "react-icons/fa";
+import { FaEnvelopeOpen as OpenEnvelope } from "react-icons/fa";
 
 const links = [
   {
@@ -21,6 +23,14 @@ const links = [
     icon: <Categories />,
     path: "/admin/dashboard/categories",
   },
+  {
+    title: "Inbox",
+    icon: {
+      close: <CloseEnvelope />,
+      open: <OpenEnvelope />,
+    },
+    path: "/admin/dashboard/inbox",
+  },
 ];
 
 export default () => {
@@ -37,7 +47,20 @@ export default () => {
                 location.pathname === l.path ? " bg-neutral-400" : " "
               } `}
             >
-              {l.icon} <span>{l.title}</span>
+              {l.title === "Inbox" ? (
+                <div className="flex items-center gap-2">
+                  {location.pathname === l.path ? (
+                    <>{l.icon.open}</>
+                  ) : (
+                    <>{l.icon.close}</>
+                  )}{" "}
+                  <span>{l.title}</span>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  {l.icon} <span>{l.title}</span>
+                </div>
+              )}
             </Link>
           </li>
         ))}
