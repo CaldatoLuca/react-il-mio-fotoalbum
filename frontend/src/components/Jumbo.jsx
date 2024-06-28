@@ -4,9 +4,25 @@ import { Link } from "react-router-dom";
 
 const imagesCarousel = [
   {
-    src: "/bg.jpeg",
+    src: "/car1.jpeg",
     alt: "Image 1",
     caption: "Black and White",
+  },
+  {
+    src: "/car2.jpg",
+    alt: "Image 2",
+    caption: "Landscapes",
+  },
+  {
+    src: "/car3.jpg",
+    alt: "Image 3",
+    caption: "Sport",
+  },
+
+  {
+    src: "/car6.jpg",
+    alt: "Image 6",
+    caption: "Street Photography",
   },
 ];
 
@@ -16,17 +32,15 @@ const Home = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % imagesCarousel.length);
-    }, 2000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="h-screen relative overflow-hidden">
-      <div className="absolute inset-0 text-center">
+      <div className="absolute inset-0 flex flex-col justify-center items-center text-neutral-300 text-center gap-10">
         <Header />
-      </div>
-      <div className="absolute inset-0 flex justify-center items-center text-neutral-300 text-center">
         <h1 className="text-4xl font-bold">{imagesCarousel[index].caption}</h1>
       </div>
 

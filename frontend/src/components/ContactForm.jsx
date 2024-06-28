@@ -36,7 +36,10 @@ export default () => {
     }
   };
   return (
-    <div className=" container mx-auto flex flex-col justify-center items-center py-16 relative">
+    <div
+      id="contact-me"
+      className=" container mx-auto flex flex-col justify-center items-center py-16 relative"
+    >
       <h3 className="text-3xl font-semibold mb-6">Contact Me</h3>
       {success ? (
         <div className=" italic p-4 shadow-2xl absolute bottom-5 ">
