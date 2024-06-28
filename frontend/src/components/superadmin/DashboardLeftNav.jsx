@@ -12,7 +12,7 @@ const links = [
     path: "/admin/dashboard",
   },
   {
-    title: "Add Photo",
+    title: "Photo",
     icon: <Add />,
     path: "/admin/dashboard/add-photo",
   },
@@ -33,13 +33,11 @@ export default () => {
           <li key={`link-${i}`}>
             <Link
               to={l.path}
-              className={`flex items-center gap-2 px-2 py-1 ${
-                location.pathname === l.path
-                  ? "font-semibold bg-neutral-400"
-                  : "hover:bg-neutral-400 "
+              className={`flex items-center gap-2 px-5 py-1 hover:bg-neutral-400 ${
+                location.pathname === l.path ? " bg-neutral-400" : " "
               } `}
             >
-              {l.icon} {l.title}
+              {l.icon} <span>{l.title}</span>
             </Link>
           </li>
         ))}

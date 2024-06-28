@@ -35,7 +35,7 @@ model Photo {
   id          Int        @id @default(autoincrement())
   title       String
   slug        String     @unique
-  description String?
+  description String     @db.Text
   image       String
   visible     Boolean    @default(true)
   categories  Category[]

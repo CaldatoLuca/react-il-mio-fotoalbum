@@ -57,7 +57,7 @@ export default () => {
   };
 
   return (
-    <div className="flex flex-col">
+    <div>
       <div className="grid grid-cols-2">
         <div className="col-span-1">
           <h2 className="text-4xl font-semibold mb-12">Create a new Photo</h2>

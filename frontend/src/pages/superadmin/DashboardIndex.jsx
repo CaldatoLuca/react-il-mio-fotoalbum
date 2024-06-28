@@ -6,7 +6,7 @@ export default () => {
   const { photoPaginate, fetchPhotosPaginate, deletePhoto, loading } =
     usePhotos();
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(50);
   const [filter, setFilter] = useState("");
 
   const handleDeleteClick = async (slug) => {
@@ -56,7 +56,7 @@ export default () => {
           />
         ))}
       </div>
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-4 gap-4">
         <button
           onClick={() => setPage(page > 1 ? page - 1 : 1)}
           className={` ${page === 1 ? "hidden" : "px-4 py-2 bg-gray-300"}`}

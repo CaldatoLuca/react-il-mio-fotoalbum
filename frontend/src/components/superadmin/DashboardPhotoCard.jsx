@@ -7,7 +7,7 @@ export default ({ title, image, categories, user, slug, deletePhoto }) => {
   const { baseImgUrl } = useGlobal();
 
   return (
-    <div className="col-span-1 shadow-2xl">
+    <div className="col-span-1 shadow-2xl flex flex-col">
       {/* Titolo e bottoni */}
       <div className="text-center p-2 text-lg font-semibold flex justify-between items-center">
         <Link to={`/admin/dashboard/update/${slug}`} className="text-sky-400">
@@ -32,12 +32,12 @@ export default ({ title, image, categories, user, slug, deletePhoto }) => {
       </Link>
 
       {/* Categories */}
-      <ul className="flex flex-wrap gap-2 p-2 justify-center">
+      <ul className="flex flex-wrap gap-2 p-2 justify-center items-center flex-grow">
         {categories.map((c, i) => (
           <li
             key={`cat-${i}`}
             className={`text-neutral-200 bg-neutral-800 px-3 shadow-2xl ${
-              i > 3 ? "hidden" : ""
+              i > 2 ? "hidden" : ""
             }`}
           >
             {c.name}
@@ -45,7 +45,9 @@ export default ({ title, image, categories, user, slug, deletePhoto }) => {
         ))}
       </ul>
 
-      <div className="text-center p-2 text-lg font-semibold ">{user.name}</div>
+      <div className="text-center p-2 text-lg font-semibold mt-auto">
+        {user.name}
+      </div>
     </div>
   );
 };
