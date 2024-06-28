@@ -1,9 +1,12 @@
 import useForm from "../hooks/useForm";
 import InputElement from "../components/InputElement";
 import { useState } from "react";
+import { useGlobal } from "../contexts/GlobalContext";
 
 export default () => {
+  const { sendMessage } = useGlobal();
   const [err, setErr] = useState(false);
+  const [success, setSuccess] = useState(false);
   const formFields = [
     { type: "email", name: "email", label: "Email", required: true },
     { type: "textarea", name: "message", label: "Message", required: true },
@@ -18,18 +21,29 @@ export default () => {
     e.preventDefault();
 
     try {
-      //   await addPhoto(formValues);
-      //   resetForm();
-      //   navigate("/admin/dashboard", {
-      //     state: { message: "Photo created successfully" },
-      //   });
+      const data = {
+        email: formValues.email.trim(),
+        message: formValues.message.trim(),
+      };
+      await sendMessage(data);
+      setSuccess(true);
+      const interval = setInterval(() => setSuccess(false), 3000);
+      resetForm();
     } catch (e) {
       setErr(e.message);
+    } finally {
+      clearInterval(interval);
     }
   };
   return (
-    <div className=" container mx-auto flex flex-col justify-center items-center py-16">
+    <div className=" container mx-auto flex flex-col justify-center items-center py-16 relative">
       <h3 className="text-3xl font-semibold mb-6">Contact Me</h3>
+      {success ? (
+        <div className=" italic p-4 shadow-2xl absolute bottom-5 ">
+          Thank you for your message, I will respond as soon as possible. See
+          you soon.
+        </div>
+      ) : null}
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-3/5">
         {formFields.map((field) => (
           <InputElement

@@ -39,6 +39,9 @@ const index = async (req, res, next) => {
     const contactMessages = await prisma.contactMessage.findMany({
       take: parseInt(limit),
       skip: parseInt(offset),
+      orderBy: {
+        createdAt: "desc",
+      },
     });
     res.status(200).json({
       message: `${contactMessages.length} Messages found`,
