@@ -27,3 +27,9 @@ Il fotografo avrà una area di amministrazione dove:
 - filtrabili per titolo
 - form di contatto dove inviare un messaggio assieme alla propria email (salvarlo sul db)
 - pagine area amministrazione
+
+TODO
+
+- cliccando su una categoria ti apre una lista di foto con quella categoria
+- modale per le delete
+- in front pagine per categorie e cazzatine varie
