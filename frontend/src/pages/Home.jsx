@@ -1,6 +1,7 @@
 import Jumbo from "../components/Jumbo";
 import Main from "../components/Main";
 import ContactForm from "../components/ContactForm";
+import Footer from "../components/Footer";
 
 export default () => {
   return (
@@ -9,6 +10,7 @@ export default () => {
         <Jumbo />
         <Main />
         <ContactForm />
+        <Footer />
       </div>
     </>
   );
