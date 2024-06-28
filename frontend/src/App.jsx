@@ -8,11 +8,17 @@ import NotFound from "./pages/NotFound";
 import DashboardAddPhoto from "./pages/superadmin/DashboardAddPhoto";
 import DashboardUpdatePhoto from "./pages/superadmin/DashboardUpdatePhoto";
 import DashboardCategoriesIndex from "./pages/superadmin/DashboardCategoriesIndex";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <Routes>
+      <Route index element={<Home />} />
+
+      {/* Superadmin Login */}
       <Route path="/admin/login" element={<Login />} />
+
+      {/* Superadmin */}
       <Route
         path="/admin/dashboard"
         element={

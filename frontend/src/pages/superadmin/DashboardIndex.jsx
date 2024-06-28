@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { usePhotos } from "../../contexts/PhotosContext";
 import DashboardPhotoCard from "../../components/superadmin/DashboardPhotoCard";
+import { BsArrowUpSquareFill as ScrollUp } from "react-icons/bs";
 
 export default () => {
   const { photoPaginate, fetchPhotosPaginate, deletePhoto, loading } =
@@ -12,6 +13,10 @@ export default () => {
   const handleDeleteClick = async (slug) => {
     await deletePhoto(slug);
     fetchPhotosPaginate(page, limit);
+  };
+
+  const scrollUp = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -76,6 +81,13 @@ export default () => {
           Next
         </button>
       </div>
+
+      <button
+        onClick={scrollUp}
+        className=" fixed bottom-5 left-5 text-neutral-200  text-3xl"
+      >
+        <ScrollUp />
+      </button>
     </>
   );
 };
