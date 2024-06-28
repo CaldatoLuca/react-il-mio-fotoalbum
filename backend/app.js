@@ -8,6 +8,7 @@ const errorHandler = require("./middlewares/errorHandler");
 const authRouter = require("./routers/AuthRouter");
 const photoRouter = require("./routers/photoRouter");
 const categoryRouter = require("./routers/categoryRouter");
+const messageRouter = require("./routers/messageRouter");
 
 require("dotenv").config();
 
@@ -27,6 +28,7 @@ app.get("/", (req, res) => {
 app.use("/auth", authRouter);
 app.use("/photos", photoRouter);
 app.use("/categories", categoryRouter);
+app.use("/messages", messageRouter);
 
 app.use(notFound);
 app.use(errorHandler);
