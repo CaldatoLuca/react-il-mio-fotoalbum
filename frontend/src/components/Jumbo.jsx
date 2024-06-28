@@ -1,33 +1,38 @@
 import { useEffect, useState } from "react";
 import Header from "./Header";
+import { Link } from "react-router-dom";
 
 const imagesCarousel = [
   {
     src: "/bg.jpeg",
     alt: "Image 1",
-    caption: "Caption 1",
+    caption: "Black and White",
   },
 ];
-export default () => {
-  const [index, setIndex] = useState(0); // Initialize index to 0
 
-  // Use useEffect for automatic carousel
+const Home = () => {
+  const [index, setIndex] = useState(0);
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % imagesCarousel.length); // Use carouselImg.length for the modulo operation
+      setIndex((prevIndex) => (prevIndex + 1) % imagesCarousel.length);
     }, 2000);
 
-    return () => clearInterval(interval); // Cleanup interval on component unmount
-  }, []); // Empty dependency array to run effect only once
-  return (
-    <>
-      <div className="h-screen  relative overflow-hidden">
-        <div className="absolute inset-0  text-white text-center">
-          <Header></Header>
-        </div>
+    return () => clearInterval(interval);
+  }, []);
 
-        <img src={imagesCarousel[index].src} alt={imagesCarousel[index].alt} />
+  return (
+    <div className="h-screen relative overflow-hidden">
+      <div className="absolute inset-0 text-center">
+        <Header />
       </div>
-    </>
+      <div className="absolute inset-0 flex justify-center items-center text-neutral-300 text-center">
+        <h1 className="text-4xl font-bold">{imagesCarousel[index].caption}</h1>
+      </div>
+
+      <img src={imagesCarousel[index].src} alt={imagesCarousel[index].alt} />
+    </div>
   );
 };
+
+export default Home;
