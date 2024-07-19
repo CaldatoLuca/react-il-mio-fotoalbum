@@ -31,5 +31,4 @@ Il fotografo avrà una area di amministrazione dove:
 TODO
 
 - cliccando su una categoria ti apre una lista di foto con quella categoria
-- modale per le delete
 - in front pagine per categorie e cazzatine varie
